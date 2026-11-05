@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>Ad Grind Billboard</title>
+<meta name="description" content="The public billboard for Ad Grind. The top boosted businesses, apps, and listings — earned with credits from playing dumb little games. Anybody can look. Anybody can climb." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&family=Archivo+Narrow:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#f4f2ec;
+    --bg-soft:#ebe8de;
+    --ink:#17150f;
+    --ink-2:#4c473c;
+    --ink-3:#7d7767;
+    --line:#d8d2c2;
+    --card:#fffdf7;
+    --amber:#f5a400;
+    --amber-deep:#c67f00;
+    --orange:#e8541e;
+    --teal:#0e7a6d;
+    --board-bg:#12100b;
+    --board-panel:#1d1a13;
+    --board-ink:#f7f2e4;
+    --board-ink-2:#c9c0a6;
+    --gold:#ffc61a;
+    --shadow:0 18px 40px rgba(23,21,15,.14);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#100e0a;
+      --bg-soft:#171410;
+      --ink:#f4efe1;
+      --ink-2:#c9c0a6;
+      --ink-3:#948b74;
+      --line:#2e2a20;
+      --card:#1a1712;
+      --amber:#ffb61e;
+      --amber-deep:#f5a400;
+      --shadow:0 18px 40px rgba(0,0,0,.5);
+      color-scheme: dark;
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+  .display{font-family:"Anton",Impact,sans-serif;font-weight:400;letter-spacing:.01em;text-transform:uppercase;line-height:.98}
+  .narrow{font-family:"Archivo Narrow","Archivo",sans-serif}
+
+  /* ---------- top strip ---------- */
+  .topstrip{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    padding:14px 0 4px;
+    font-size:13px;font-weight:600;color:var(--ink-2);
+  }
+  .topstrip .live-dot{display:inline-flex;align-items:center;gap:7px;text-transform:uppercase;letter-spacing:.12em;font-size:11.5px}
+  .dot{width:9px;height:9px;border-radius:50%;background:#2ea44f;box-shadow:0 0 0 0 rgba(46,164,79,.5);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(46,164,79,.45)}70%{box-shadow:0 0 0 8px rgba(46,164,79,0)}100%{box-shadow:0 0 0 0 rgba(46,164,79,0)}}
+  @media (prefers-reduced-motion: reduce){.dot{animation:none}.marquee-lights span{animation:none!important}}
+
+  /* ---------- the billboard ---------- */
+  .board-zone{padding:10px 0 8px}
+  .board{
+    background:var(--board-bg);
+    border-radius:18px;
+    padding:14px;
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  .marquee-lights{display:flex;justify-content:space-between;padding:2px 6px 10px;overflow:hidden}
+  .marquee-lights span{
+    width:9px;height:9px;border-radius:50%;flex:0 0 auto;
+    background:#3a3527;
+  }
+  .marquee-lights span.on{background:var(--gold);box-shadow:0 0 10px 2px rgba(255,198,26,.55)}
+  .screen{
+    background:var(--board-panel);
+    border:1px solid #35301f;
+    border-radius:12px;
+    color:var(--board-ink);
+    overflow:hidden;
+    position:relative;
+    min-height:340px;
+    display:flex;flex-direction:column;
+  }
+  .screen-accent{height:8px;background:var(--spot,#f5a400)}
+  .screen-body{padding:30px 30px 26px;flex:1;display:flex;flex-direction:column}
+  .spot-kicker{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);
+  }
+  .spot-kicker .rank-chip{
+    background:var(--gold);color:#17150f;border-radius:999px;padding:3px 11px;letter-spacing:.06em;
+  }
+  .spot-kicker .cat{color:var(--board-ink-2);letter-spacing:.1em}
+  .screen h1{
+    font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercase;
+    font-size:clamp(38px,6.4vw,68px);line-height:.98;margin:16px 0 6px;letter-spacing:.01em;
+  }
+  .screen .tagline{
+    font-family:"Archivo Narrow",sans-serif;font-weight:600;
+    font-size:clamp(20px,3vw,28px);color:var(--gold);margin:0 0 12px;
+  }
+  .screen .blurb{color:var(--board-ink-2);max-width:56ch;margin:0 0 22px;font-size:16.5px}
+  .screen-actions{margin-top:auto;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-weight:700;font-size:15px;text-decoration:none;
+    border-radius:10px;padding:12px 20px;border:1px solid transparent;cursor:pointer;
+    transition:transform .12s ease, background .12s ease;
+  }
+  .btn:active{transform:scale(.98)}
+  .btn-gold{background:var(--gold);color:#17150f}
+  .btn-gold:hover{background:#ffd23e}
+  .btn-ghost{background:transparent;color:var(--board-ink);border-color:#4a4433}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+  .btn-dark{background:var(--ink);color:var(--bg)}
+  .btn-amber{background:var(--amber);color:#17150f}
+  .btn-outline{background:transparent;color:var(--ink);border-color:var(--line)}
+  .screen-meta{font-size:13px;color:var(--board-ink-2)}
+  @media (max-width:580px){
+    .screen{min-height:0}
+    .screen-body{padding:24px 20px 22px}
+    .screen h1{font-size:34px;line-height:1.04}
+    .marquee-lights span:nth-child(even){display:none}
+    .board-nav{flex-direction:column;align-items:flex-start;gap:10px}
+    .topstrip{flex-direction:column;align-items:flex-start;gap:4px}
+  }
+  .board-nav{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+    padding:14px 4px 2px;color:#efe9d6;
+  }
+  .board-nav .poles{font-size:12.5px;color:#9a927a;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+  .rotator{display:flex;align-items:center;gap:10px}
+  .rot-btn{
+    width:38px;height:38px;border-radius:50%;border:1px solid #4a4433;background:#1d1a13;color:#efe9d6;
+    font-size:17px;cursor:pointer;display:grid;place-items:center;line-height:1;
+  }
+  .rot-btn:hover{border-color:var(--gold);color:var(--gold)}
+  .rot-dots{display:flex;gap:7px}
+  .rot-dots button{
+    width:26px;height:6px;border-radius:99px;border:0;padding:0;cursor:pointer;background:#3a3527;
+  }
+  .rot-dots button.active{background:var(--gold)}
+  .board-caption{
+    text-align:center;color:var(--ink-2);font-size:14px;margin:14px auto 0;max-width:62ch;
+  }
+  .board-caption strong{color:var(--ink)}
+
+  /* ---------- sections ---------- */
+  section{padding:44px 0 6px}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+  h2.sec-title{font-family:"Anton",Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(26px,3.6vw,36px);margin:0;letter-spacing:.01em}
+  .sec-sub{color:var(--ink-2);max-width:66ch;margin:6px 0 20px}
+
+  /* leaderboard */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:580px){.grid{grid-template-columns:1fr}}
+  .spot-card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:20px;display:flex;flex-direction:column;gap:8px;text-align:left;
+    font:inherit;color:inherit;cursor:pointer;width:100%;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .spot-card:hover{border-color:var(--amber);transform:translateY(-2px)}
+  .spot-card.on-screen{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber) inset}
+  .spot-card .topline{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .rank{font-family:"Anton",Impact,sans-serif;font-size:22px;color:var(--amber-deep)}
+  .tier{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:var(--bg-soft);color:var(--ink-2)}
+  .tier.top{background:var(--gold);color:#17150f}
+  .spot-card h3{margin:2px 0 0;font-size:19px;line-height:1.25}
+  .spot-card .tg{font-family:"Archivo Narrow",sans-serif;font-weight:600;font-size:16.5px;color:var(--amber-deep);margin:0}
+  @media (prefers-color-scheme: dark){.spot-card .tg{color:var(--amber)}}
+  .spot-card p{margin:0;color:var(--ink-2);font-size:14.5px;flex:1}
+  .spot-card .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px;font-weight:700}
+  .spot-card .foot .view{color:var(--amber-deep)}
+  @media (prefers-color-scheme: dark){.spot-card .foot .view{color:var(--amber)}}
+  .spot-card .swatch{height:6px;border-radius:99px;background:var(--c,#f5a400);margin-bottom:2px}
+  .open-card{
+    border:1.5px dashed var(--amber);background:transparent;border-radius:14px;padding:20px;
+    display:flex;flex-direction:column;gap:8px;justify-content:center;
+  }
+  .open-card h3{margin:0;font-size:19px}
+  .open-card p{margin:0;color:var(--ink-2);font-size:14.5px}
+  .open-card a{font-weight:800;color:var(--amber-deep);text-decoration:none}
+  @media (prefers-color-scheme: dark){.open-card a{color:var(--amber)}}
+
+  /* how it works */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media (max-width:820px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .step .num{
+    font-family:"Anton",Impact,sans-serif;font-size:30px;color:var(--bg);
+    background:var(--ink);width:46px;height:46px;border-radius:12px;display:grid;place-items:center;margin-bottom:12px;
+  }
+  .step h3{margin:0 0 6px;font-size:17.5px}
+  .step p{margin:0;color:var(--ink-2);font-size:14.5px}
+  .step p strong{color:var(--ink)}
+
+  /* rates + calculator */
+  .rates-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;align-items:start}
+  @media (max-width:860px){.rates-layout{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .panel h3{margin:0 0 4px;font-size:18px}
+  .panel .sub{color:var(--ink-2);font-size:14px;margin:0 0 16px}
+  table.rates{width:100%;border-collapse:collapse;font-size:14.5px}
+  table.rates th,table.rates td{padding:11px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.rates tr:last-child th,table.rates tr:last-child td{border-bottom:0}
+  table.rates th{text-align:left;font-weight:700;padding-left:0}
+  table.rates td{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  table.rates td.credits{font-weight:800;color:var(--amber-deep)}
+  @media (prefers-color-scheme: dark){table.rates td.credits{color:var(--amber)}}
+  table.rates .note{display:block;font-weight:400;color:var(--ink-3);font-size:12.5px;white-space:normal;text-align:left;margin-top:2px}
+  .calc-out{
+    background:var(--bg-soft);border-radius:12px;padding:16px 18px;margin-top:4px;
+  }
+  .calc-out .big{font-family:"Anton",Impact,sans-serif;font-size:34px;line-height:1.05}
+  .calc-out .lbl{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+  .calc-rows{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  .calc-rows .cell{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .calc-rows .cell .v{font-weight:800;font-size:17px;font-variant-numeric:tabular-nums}
+  .calc-rows .cell .k{font-size:12px;color:var(--ink-3);font-weight:600}
+  input[type=range]{width:100%;accent-color:var(--amber);height:36px;cursor:pointer}
+  .range-row{display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:var(--ink-2);margin-top:2px}
+  .range-row output{color:var(--ink);font-variant-numeric:tabular-nums}
+  select{
+    width:100%;font:inherit;font-weight:600;padding:11px 12px;border-radius:10px;
+    border:1px solid var(--line);background:var(--card);color:var(--ink);margin-bottom:14px;
+  }
+  label.flabel{display:block;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+
+  /* claim a spot */
+  .claim{background:var(--board-bg);color:var(--board-ink);border-radius:18px;padding:30px;margin-top:8px}
+  .claim h2{color:var(--board-ink)}
+  .claim .sec-sub{color:var(--board-ink-2)}
+  .claim-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media (max-width:820px){.claim-grid{grid-template-columns:1fr}}
+  .claim-form label.flabel{color:#9a927a}
+  .claim-form input,.claim-form textarea{
+    width:100%;font:inherit;padding:12px 13px;border-radius:10px;margin-bottom:14px;
+    border:1px solid #3a3527;background:#1d1a13;color:var(--board-ink);
+  }
+  .claim-form input::placeholder,.claim-form textarea::placeholder{color:#6f6955}
+  .claim-form textarea{resize:vertical;min-height:74px}
+  .claim-side{display:flex;flex-direction:column;gap:12px}
+  .claim-side .mini{
+    border:1px solid #35301f;border-radius:12px;padding:16px 18px;background:#171410;
+  }
+  .claim-side .mini h4{margin:0 0 4px;font-size:15px;color:var(--gold)}
+  .claim-side .mini p{margin:0;font-size:14px;color:var(--board-ink-2)}
+  .claim-result{
+    display:none;border:1px solid var(--gold);border-radius:12px;padding:16px 18px;background:#171410;margin-top:4px;
+  }
+  .claim-result.show{display:block}
+  .claim-result h4{margin:0 0 6px;color:var(--gold);font-size:15px}
+  .claim-result p{margin:0 0 12px;font-size:14px;color:var(--board-ink-2);white-space:pre-wrap}
+  .claim-result .row{display:flex;gap:10px;flex-wrap:wrap}
+  .claim-result .row button{
+    font:inherit;font-weight:700;font-size:14px;border-radius:9px;padding:10px 16px;cursor:pointer;
+    border:1px solid #4a4433;background:transparent;color:var(--board-ink);
+  }
+  .claim-result .row button.primary{background:var(--gold);color:#17150f;border-color:var(--gold)}
+  .form-err{display:none;color:#ff9d7a;font-size:13.5px;font-weight:600;margin:-6px 0 12px}
+  .form-err.show{display:block}
+
+  /* faq */
+  .faq{border-top:1px solid var(--line)}
+  .faq details{border-bottom:1px solid var(--line);padding:16px 2px}
+  .faq summary{cursor:pointer;font-weight:700;font-size:16.5px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-family:"Anton",sans-serif;color:var(--amber-deep);font-size:20px;line-height:1}
+  .faq details[open ] summary::after{content:"–"}
+  .faq p{color:var(--ink-2);margin:10px 0 2px;max-width:68ch}
+
+  footer{padding:40px 0 48px;margin-top:44px;border-top:1px solid var(--line)}
+  footer .foot-grid{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  footer p{color:var(--ink-3);font-size:13.5px;max-width:60ch;margin:0}
+  footer .brand{font-family:"Anton",sans-serif;text-transform:uppercase;font-size:18px;color:var(--ink);letter-spacing:.02em}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="topstrip">
+    <span class="live-dot"><span class="dot" aria-hidden="true"></span> On the board right now</span>
+    <span>San Angelo, Texas · The public board for the Ad Grind app</span>
+  </div>
+
+  <!-- ============ THE BILLBOARD ============ -->
+  <div class="board-zone">
+    <div class="board" role="region" aria-label="Ad Grind billboard spotlight">
+      <div class="marquee-lights" id="lightsTop" aria-hidden="true"></div>
+      <div class="screen">
+        <div class="screen-accent" id="spotAccent"></div>
+        <div class="screen-body">
+          <div class="spot-kicker">
+            <span class="rank-chip" id="spotRank">Spot #1</span>
+            <span class="cat" id="spotCat">Landscaping &amp; Handyman</span>
+          </div>
+          <h1 id="spotName">Bethel's Landscaping &amp; Handyman Services</h1>
+          <p class="tagline" id="spotTagline">Dream It. We'll Build It.</p>
+          <p class="blurb" id="spotBlurb">Xeriscaping, hardscaping, permeable pavers, custom decks, gazebos and pergolas — designed and built in San Angelo, TX.</p>
+          <div class="screen-actions">
+            <a class="btn btn-gold" id="spotLink" href="https://btb2249.github.io/bethels-landscaping/" target="_blank" rel="noopener">Visit the site</a>
+            <span class="screen-meta" id="spotMeta">Boosted to the top of the board with Ad Grind credits</span>
+          </div>
+        </div>
+      </div>
+      <div class="board-nav">
+        <span class="poles">Top spots rotate · tap a card below to preview it up here</span>
+        <div class="rotator">
+          <button class="rot-btn" id="rotPrev" aria-label="Previous spot">‹</button>
+          <div class="rot-dots" id="rotDots" role="tablist" aria-label="Billboard spots"></div>
+          <button class="rot-btn" id="rotNext" aria-label="Next spot">›</button>
+        </div>
+      </div>
+    </div>
+    <p class="board-caption">This is the open-web board for <strong>Ad Grind</strong> — the app where you play dumb little games, earn Ad Credits, and spend them putting <strong>your</strong> business, app, or listing in front of everybody. The spots up top weren't bought with cash. They were <strong>ground for</strong>.</p>
+  </div>
+
+  <!-- ============ LEADERBOARD ============ -->
+  <section aria-labelledby="boardTitle">
+    <div class="sec-head">
+      <h2 class="sec-title" id="boardTitle">The board, ranked</h2>
+    </div>
+    <p class="sec-sub">The launch lineup: the first spots are held by the apps and businesses in the Ad Grind family. Every one of them can be knocked down the board — out-boost a spot in the app and your thing takes its place here for the whole web to see.</p>
+    <div class="grid" id="spotGrid"></div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section aria-labelledby="howTitle">
+    <div class="sec-head"><h2 class="sec-title" id="howTitle">How a spot is earned</h2></div>
+    <p class="sec-sub">No ad account. No credit card. No marketing degree. If you can tap a phone screen 100 times in 10 seconds, you can advertise.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Grind the dumb stuff</h3>
+        <p>Open Ad Grind and play: <strong>Tap Frenzy, Reaction Rush, Coin Flip Streak, Number Memory, the Bonus Spin</strong> — plus tasks like counting to 100 and typing the alphabet backwards. Every win drops <strong>Ad Credits</strong> in your pocket.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Pick your thing</h3>
+        <p>A business, an app, a website, an item you're selling — <strong>anything with a name and a link</strong>. Write its tagline, pick its color, and it's in the Ad Grind rotation: the in-app billboard, the ad feed, and pop-ins between games.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Spend credits, climb the board</h3>
+        <p>Credits buy boost time. The harder a spot is boosted, the higher it sits — in the app <strong>and right here</strong> on this public page, where anybody on the open web (or Facebook) can see it and tap through.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RATES + CALCULATOR ============ -->
+  <section aria-labelledby="ratesTitle">
+    <div class="sec-head"><h2 class="sec-title" id="ratesTitle">What board time costs</h2></div>
+    <p class="sec-sub">Everything on this board is priced in Ad Credits — the currency you earn playing. Here's the rate card, and a calculator so you can see exactly what your grind buys.</p>
+    <div class="rates-layout">
+      <div class="panel">
+        <h3>Billboard rate card</h3>
+        <p class="sub">Boosts stack: buy hours on a tier and your spot holds that tier until the clock runs out or somebody out-boosts it.</p>
+        <table class="rates">
+          <tr>
+            <th>Board rotation<span class="note">Your spot cycles through the board with the other boosted spots</span></th>
+            <td class="credits">25 credits</td><td>/ hour</td>
+          </tr>
+          <tr>
+            <th>Top 3 rotation<span class="note">Your spot only cycles with the other top-3 spots — way more screen time</span></th>
+            <td class="credits">75 credits</td><td>/ hour</td>
+          </tr>
+          <tr>
+            <th>Spot #1 takeover<span class="note">The big screen up top is yours alone for the full hour</span></th>
+            <td class="credits">200 credits</td><td>/ hour</td>
+          </tr>
+          <tr>
+            <th>Full day on the board<span class="note">24 hours in the rotation, locked in — nobody bumps you off the board itself</span></th>
+            <td class="credits">400 credits</td><td>/ day</td>
+          </tr>
+        </table>
+        <p class="sub" style="margin:16px 0 0">For scale: a solid Tap Frenzy win pays about 15–25 credits, the hourly Bonus Spin can pay up to 100, and finishing a task pays 10–40. An hour in the rotation is roughly one good game.</p>
+      </div>
+      <div class="panel">
+        <h3>Credit calculator</h3>
+        <p class="sub">Slide to what you've ground up and see what it buys on this board.</p>
+        <label class="flabel" for="tierSel">Where do you want to sit?</label>
+        <select id="tierSel">
+          <option value="25">Board rotation — 25 credits/hr</option>
+          <option value="75">Top 3 rotation — 75 credits/hr</option>
+          <option value="200">Spot #1 takeover — 200 credits/hr</option>
+        </select>
+        <label class="flabel" for="creditRange">Your Ad Credits</label>
+        <input type="range" id="creditRange" min="0" max="1000" step="25" value="150" />
+        <div class="range-row"><span>0</span><output id="creditOut" for="creditRange">150 credits</output><span>1,000</span></div>
+        <div class="calc-out">
+          <div class="lbl">That buys you</div>
+          <div class="big" id="calcBig">6 hours</div>
+          <div class="calc-rows">
+            <div class="cell"><div class="v" id="calcGames">≈ 8 games</div><div class="k">of grinding to earn it back</div></div>
+            <div class="cell"><div class="v" id="calcCash">$0</div><div class="k">cash out of your pocket</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLAIM A SPOT ============ -->
+  <section aria-labelledby="claimTitle">
+    <div class="claim">
+      <div class="sec-head"><h2 class="sec-title" id="claimTitle">Want this spot?</h2></div>
+      <p class="sec-sub">Spots are claimed inside the Ad Grind app, where your credits live. Don't have the app yet — or want a spot held for your business? Send a claim request and it'll be ready to match against your credits when you sign in.</p>
+      <div class="claim-grid">
+        <form class="claim-form" id="claimForm" novalidate>
+          <label class="flabel" for="fName">What are we advertising?</label>
+          <input id="fName" type="text" placeholder="Business, app, or listing name" autocomplete="off" />
+          <label class="flabel" for="fTagline">Tagline</label>
+          <input id="fTagline" type="text" placeholder="One punchy line" autocomplete="off" />
+          <label class="flabel" for="fLink">Link (where the tap goes)</label>
+          <input id="fLink" type="text" placeholder="https://…" autocomplete="off" />
+          <label class="flabel" for="fTier">Board tier you want</label>
+          <select id="fTier" style="background:#1d1a13;color:var(--board-ink);border-color:#3a3527">
+            <option value="Board rotation — 25 credits/hr">Board rotation — 25 credits/hr</option>
+            <option value="Top 3 rotation — 75 credits/hr">Top 3 rotation — 75 credits/hr</option>
+            <option value="Spot #1 takeover — 200 credits/hr">Spot #1 takeover — 200 credits/hr</option>
+            <option value="Full day on the board — 400 credits/day">Full day on the board — 400 credits/day</option>
+          </select>
+          <p class="form-err" id="formErr">Give your thing a name and a tagline so the request makes sense when it lands.</p>
+          <button class="btn btn-gold" type="submit" style="width:100%;justify-content:center">Build my claim request</button>
+        </form>
+        <div class="claim-side">
+          <div class="mini">
+            <h4>Fastest route: the app</h4>
+            <p>In Ad Grind, your credits are already counted. Add your thing, pick a boost, and it hits this board automatically — no request forms, no waiting.</p>
+          </div>
+          <div class="mini">
+            <h4>No credits yet?</h4>
+            <p>That's the game. Credits only come from grinding — they can't be bought, so the board can't be bought either. The loudest spot here belongs to whoever played the dumbest games the longest.</p>
+          </div>
+          <div class="claim-result" id="claimResult" role="status">
+            <h4>Your claim request is ready</h4>
+            <p id="claimText"></p>
+            <div class="row">
+              <button type="button" class="primary" id="copyBtn">Copy request</button>
+              <button type="button" id="dlBtn">Download request</button>
+            </div>
+            <p id="copyNote" style="margin:10px 0 0;font-size:13px"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section aria-labelledby="faqTitle">
+    <div class="sec-head"><h2 class="sec-title" id="faqTitle">Straight answers</h2></div>
+    <div class="faq">
+      <details>
+        <summary>Is this real advertising, or just inside the app?</summary>
+        <p>Both, and here's the honest split. Boosts put your thing in front of every Ad Grind player — the in-app billboard, the ad feed, and pop-ins between games. This page is the part that lives on the open web: anyone with the link can see the top spots, and it posts cleanly to Facebook. What credits can't do is buy space on Google or Facebook's own ad networks — those take cash through an ad account, and no game currency changes that.</p>
+      </details>
+      <details>
+        <summary>Can I just buy credits with money?</summary>
+        <p>No. Credits are earned by playing and doing tasks, full stop. That's the whole point of the board: position comes from grinding, not from whoever has the biggest wallet.</p>
+      </details>
+      <details>
+        <summary>How long does my spot stay up?</summary>
+        <p>As long as your boost clock runs. Rotation spots are bought by the hour (or locked for a full day), top-3 and #1 takeovers by the hour. When the clock runs out, your spot stays in the general Ad Grind rotation but comes off this public board until you boost again.</p>
+      </details>
+      <details>
+        <summary>Someone out-boosted me. What happens?</summary>
+        <p>They take the higher spot and you slide down one — your remaining boost time still counts at the tier below. That's the game working as intended. Grind more, boost harder, take it back.</p>
+      </details>
+      <details>
+        <summary>What can I put on the board?</summary>
+        <p>Anything that's yours to promote and legal to advertise: a business, an app, a website, a service, an item for sale. If it has a name and a link, it can go up. Spots that point at scams or other people's stuff get pulled.</p>
+      </details>
+      <details>
+        <summary>Who runs Ad Grind?</summary>
+        <p>Ad Grind is an independent app project out of San Angelo, Texas. This billboard is its public face — the in-app board and this page run off the same boosts.</p>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <div class="brand">Ad Grind Billboard</div>
+        <p style="margin-top:6px">Play dumb games. Earn credits. Advertise anything. The top boosted spots in the Ad Grind app, live on the open web.</p>
+      </div>
+      <p>Spots on this board are earned with in-app Ad Credits and rotate as boosts change. Listings link out to each advertiser's own site — Ad Grind doesn't sell anything on their behalf.</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Billboard data: the launch lineup ---------- */
+  var SPOTS = [
+    {
+      name: "Bethel's Landscaping & Handyman Services",
+      tagline: "Dream It. We'll Build It.",
+      blurb: "Xeriscaping, hardscaping, permeable pavers, custom decks, gazebos and pergolas — designed and built in San Angelo, TX.",
+      cat: "Landscaping & Handyman · San Angelo, TX",
+      link: "https://btb2249.github.io/bethels-landscaping/",
+      linkLabel: "Visit the site",
+      color: "#7ac142",
+      tier: "Spot #1 · Takeover",
+      meta: "The home-team spot — holding #1 until somebody out-grinds it"
+    },
+    {
+      name: "Owed",
+      tagline: "It's already yours. We go get it.",
+      blurb: "Texas is holding unclaimed money — old paychecks, refunds, forgotten accounts. Owed helps you find yours and claim it. The state pays you directly.",
+      cat: "Unclaimed Money · Texas",
+      link: "https://btb2249.github.io/owed/",
+      linkLabel: "Look up your money — free",
+      color: "#ffc61a",
+      tier: "Top 3",
+      meta: "Boosted into the top 3 with Ad Credits"
+    },
+    {
+      name: "FlowBuilt",
+      tagline: "From Runoff to Renewal. Built for Tomorrow.",
+      blurb: "Pavers and walkways, rain gardens, bioswales, and permeable hardscapes built for Texas weather and Texas water.",
+      cat: "Hardscaping · Stormwater",
+      link: "",
+      linkLabel: "",
+      color: "#2f9e8f",
+      tier: "Top 3",
+      meta: "Boosted into the top 3 with Ad Credits"
+    },
+    {
+      name: "Blueprint Maker",
+      tagline: "Describe it. Get a plan you can actually build from.",
+      blurb: "Two-story shed, porch swing, gazebo, deck — describe the project and get a full plan: layout, materials list, exact cut list, and steps written plain enough for a kid to follow.",
+      cat: "App · DIY Build Plans",
+      link: "",
+      linkLabel: "",
+      color: "#e8541e",
+      tier: "On the board",
+      meta: "Holding a board rotation spot"
+    },
+    {
+      name: "Post Everywhere",
+      tagline: "Write it once. Sell it everywhere.",
+      blurb: "One master listing, copy-ready packs for eBay, Facebook Marketplace, Mercari, Poshmark and more — with true fee math and a sold-item pull-down checklist so you never sell the same thing twice.",
+      cat: "App · Resellers",
+      link: "",
+      linkLabel: "",
+      color: "#4f8fd0",
+      tier: "On the board",
+      meta: "Holding a board rotation spot"
+    },
+    {
+      name: "Bethel's Design Studio",
+      tagline: "Design the yard before you dig.",
+      blurb: "Tap-to-place lot planning, live pricing, and instant estimates for landscape projects — built for landscape companies and their customers.",
+      cat: "App · Landscape Design",
+      link: "",
+      linkLabel: "",
+      color: "#f5a400",
+      tier: "On the board",
+      meta: "Holding a board rotation spot"
+    },
+    {
+      name: "TradeWeb Co.",
+      tagline: "A website that pays for itself.",
+      blurb: "Landing pages, instant estimate calculators, and back-office apps built for trade companies — rent-a-website, template, or full custom. See the live Lone Star Fence & Deck demo.",
+      cat: "Websites & Apps · For Trade Businesses",
+      link: "https://btb2249.github.io/lone-star-fence-deck/",
+      linkLabel: "See the live demo",
+      color: "#3f7de0",
+      tier: "On the board",
+      meta: "Holding a board rotation spot"
+    },
+    {
+      name: "Rockin' J Rentals",
+      tagline: "Bounce houses & a 5-acre party ranch.",
+      blurb: "Inflatable rentals from $150/day and party venue packages at a family-run 5-acre ranch in San Angelo — bounce castles, water slides, obstacle courses, tables and chairs.",
+      cat: "Party Rentals · San Angelo, TX",
+      link: "https://btb2249.github.io/rockin-j-rentals/",
+      linkLabel: "See rentals & packages",
+      color: "#d94f70",
+      tier: "On the board",
+      meta: "Holding a board rotation spot"
+    }
+  ];
+
+  /* ---------- marquee lights ---------- */
+  var lightsEl = document.getElementById("lightsTop");
+  var LIGHT_COUNT = 28;
+  var lightSpans = [];
+  for (var i = 0; i < LIGHT_COUNT; i++){
+    var s = document.createElement("span");
+    lightsEl.appendChild(s);
+    lightSpans.push(s);
+  }
+  var lightPhase = 0;
+  function tickLights(){
+    lightPhase++;
+    for (var j = 0; j < lightSpans.length; j++){
+      if ((j + lightPhase) % 2 === 0) lightSpans[j].classList.add("on");
+      else lightSpans[j].classList.remove("on");
+    }
+  }
+  tickLights();
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduceMotion) setInterval(tickLights, 650);
+
+  /* ---------- spotlight rotation ---------- */
+  var current = 0;
+  var timer = null;
+  var accentEl = document.getElementById("spotAccent");
+  var rankEl = document.getElementById("spotRank");
+  var catEl = document.getElementById("spotCat");
+  var nameEl = document.getElementById("spotName");
+  var tagEl = document.getElementById("spotTagline");
+  var blurbEl = document.getElementById("spotBlurb");
+  var linkEl = document.getElementById("spotLink");
+  var metaEl = document.getElementById("spotMeta");
+  var dotsEl = document.getElementById("rotDots");
+
+  var dotBtns = SPOTS.map(function(_, idx){
+    var b = document.createElement("button");
+    b.setAttribute("role", "tab");
+    b.setAttribute("aria-label", "Show spot " + (idx + 1));
+    b.addEventListener("click", function(){ show(idx); restart(); });
+    dotsEl.appendChild(b);
+    return b;
+  });
+
+  function show(idx){
+    current = (idx + SPOTS.length) % SPOTS.length;
+    var sp = SPOTS[current];
+    accentEl.style.background = sp.color;
+    rankEl.textContent = "Spot #" + (current + 1);
+    catEl.textContent = sp.cat;
+    nameEl.textContent = sp.name;
+    tagEl.textContent = sp.tagline;
+    tagEl.style.color = sp.color === "#7ac142" ? "#a4d977" : "var(--gold)";
+    blurbEl.textContent = sp.blurb;
+    metaEl.textContent = sp.meta;
+    if (sp.link){
+      linkEl.style.display = "";
+      linkEl.href = sp.link;
+      linkEl.textContent = sp.linkLabel || "Visit";
+    } else {
+      linkEl.style.display = "none";
+    }
+    dotBtns.forEach(function(b, i){ b.classList.toggle("active", i === current); });
+    document.querySelectorAll(".spot-card").forEach(function(c, i){
+      c.classList.toggle("on-screen", i === current);
+    });
+  }
+  function next(){ show(current + 1); }
+  function restart(){
+    if (timer) clearInterval(timer);
+    if (!reduceMotion){
+      timer = setInterval(next, 6000);
+    }
+  }
+  document.getElementById("rotNext").addEventListener("click", function(){ next(); restart(); });
+  document.getElementById("rotPrev").addEventListener("click", function(){ show(current - 1); restart(); });
+
+  /* ---------- leaderboard cards ---------- */
+  var grid = document.getElementById("spotGrid");
+  SPOTS.forEach(function(sp, idx){
+    var card = document.createElement("button");
+    card.className = "spot-card";
+    card.type = "button";
+    card.setAttribute("aria-label", "Preview " + sp.name + " on the billboard");
+    var top = idx === 0;
+    card.innerHTML =
+      '<span class="swatch"></span>' +
+      '<span class="topline"><span class="rank">#' + (idx + 1) + '</span>' +
+      '<span class="tier' + (top ? " top" : "") + '">' + sp.tier + '</span></span>' +
+      '<h3></h3><p class="tg"></p><p class="desc"></p>' +
+      '<span class="foot"><span>' + sp.cat.split("·")[0].trim() + '</span><span class="view">Put it on the big screen ↑</span></span>';
+    card.querySelector(".swatch").style.background = sp.color;
+    card.querySelector("h3").textContent = sp.name;
+    card.querySelector(".tg").textContent = sp.tagline;
+    card.querySelector(".desc").textContent = sp.blurb;
+    card.addEventListener("click", function(){
+      show(idx); restart();
+      document.querySelector(".board").scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block: "start"});
+    });
+    grid.appendChild(card);
+  });
+
+  var open = document.createElement("div");
+  open.className = "open-card";
+  open.innerHTML = "<h3>Spot #" + (SPOTS.length + 1) + " — open</h3><p>The next spot on this board goes to whoever boosts hardest in the app. It could have your name on it by tonight.</p><a href=\"#claimTitle\">Claim it ↓</a>";
+  open.querySelector("a").addEventListener("click", function(e){
+    e.preventDefault();
+    document.querySelector(".claim").scrollIntoView({behavior: reduceMotion ? "auto" : "smooth"});
+  });
+  grid.appendChild(open);
+
+  show(0);
+  restart();
+
+  /* ---------- credit calculator ---------- */
+  var range = document.getElementById("creditRange");
+  var out = document.getElementById("creditOut");
+  var tierSel = document.getElementById("tierSel");
+  var calcBig = document.getElementById("calcBig");
+  var calcGames = document.getElementById("calcGames");
+  function fmtHours(h){
+    if (h <= 0) return "0 hours";
+    if (h < 1) return Math.round(h * 60) + " minutes";
+    if (h === 1) return "1 hour";
+    if (h >= 48) return Math.round(h / 24 * 10) / 10 + " days";
+    return (Math.round(h * 10) / 10) + " hours";
+  }
+  function calc(){
+    var credits = parseInt(range.value, 10);
+    var rate = parseInt(tierSel.value, 10);
+    out.textContent = credits.toLocaleString("en-US") + " credits";
+    var hours = credits / rate;
+    calcBig.textContent = fmtHours(hours);
+    /* a "game" ≈ 20 credits average payout */
+    var games = Math.max(0, Math.round(credits / 20));
+    calcGames.textContent = credits === 0 ? "0 games" : "≈ " + games.toLocaleString("en-US") + (games === 1 ? " game" : " games");
+  }
+  range.addEventListener("input", calc);
+  tierSel.addEventListener("change", calc);
+  calc();
+
+  /* ---------- claim form ---------- */
+  var form = document.getElementById("claimForm");
+  var err = document.getElementById("formErr");
+  var result = document.getElementById("claimResult");
+  var claimText = document.getElementById("claimText");
+  var copyNote = document.getElementById("copyNote");
+  var lastRequest = "";
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("fName").value.trim();
+    var tagline = document.getElementById("fTagline").value.trim();
+    var link = document.getElementById("fLink").value.trim();
+    var tier = document.getElementById("fTier").value;
+    if (!name || !tagline){
+      err.classList.add("show");
+      result.classList.remove("show");
+      return;
+    }
+    err.classList.remove("show");
+    lastRequest =
+      "AD GRIND BILLBOARD — SPOT CLAIM REQUEST\n" +
+      "What: " + name + "\n" +
+      "Tagline: " + tagline + "\n" +
+      "Link: " + (link || "(no link given)") + "\n" +
+      "Tier wanted: " + tier + "\n" +
+      "Note: I know spots are paid with Ad Credits earned in the app — match this to my account when I sign in.";
+    claimText.textContent = lastRequest;
+    copyNote.textContent = "";
+    result.classList.add("show");
+    result.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block: "nearest"});
+  });
+
+  document.getElementById("copyBtn").addEventListener("click", function(){
+    function done(){ copyNote.textContent = "Copied — send it to Ad Grind or hold it until you're in the app."; }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(lastRequest).then(done, function(){ fallbackCopy(); done(); });
+    } else { fallbackCopy(); done(); }
+  });
+  function fallbackCopy(){
+    var ta = document.createElement("textarea");
+    ta.value = lastRequest;
+    ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); } catch(e){}
+    document.body.removeChild(ta);
+  }
+  document.getElementById("dlBtn").addEventListener("click", function(){
+    var blob = new Blob([lastRequest], {type: "text/plain"});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "ad-grind-billboard-claim.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+  });
+})();
+</script>
+</body>
+</html>
